@@ -1,7 +1,14 @@
 
-#canvas放大镜
+#Canvas放大镜
 
 canvas.magnifier.js Use for make a magnifier in your canvas.
+
+canvas.magnifier.js 用于在canvas上生成一个放大镜，放大镜的样式可自定义
+
+[DEMO](http://jy1989.github.io/magnifier/demo.html "demo")
+
+
+## Sample
 
 you can just create magnifier by this simple way
 
@@ -17,7 +24,7 @@ function doMouseMove(event) {
 ```
 
 
-## api
+## API
 ```
 setting
   magnifierDivId      magnifier div element id
