@@ -1,0 +1,21 @@
+{
+  "name": "canvas.magnifier.js",
+  "version": "1.0.0",
+  "description": "canvas magnifier",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "canvas",
+    "magnifier"
+  ],
+  "author": "chenjianyi",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^3.2.2",
+    "gulp-jsbeautifier": "^2.0.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3"
+  }
+}
