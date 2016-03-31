@@ -27,190 +27,184 @@
  }
  window.onload = function() {
 
-         (function() {
+     (function() {
 
-             var canvas;
-             var magnifier;
-             var canvasId = 'demo_canvas';
-             canvas = initCanvas(canvasId);
+         var canvas;
+         var magnifier;
+         var canvasId = 'demo_canvas';
+         canvas = initCanvas(canvasId);
 
-             magnifier = jy.magnifier({
-                 targetCanvasId: canvasId
-             });
+         magnifier = jy.magnifier({
+             targetCanvasId: canvasId
+         });
+         magnifier.show(true);
+
+
+                canvas.addEventListener('mousemove', doMouseMove, false);
+
+
+         function doMouseMove(event) {
+             magnifier.bind(event);
+         }
+
+
+     })();
+
+
+
+     (function() {
+
+         var canvas;
+         var magnifier;
+         var canvasId = 'demo_canvas1';
+         canvas = initCanvas(canvasId);
+
+         magnifier = jy.magnifier({
+             targetCanvasId: canvasId,
+             width: 300,
+             height: 300,
+             radius: 150,
+             ratio: 5,
+             sightColor: 'yellow',
+             sightSize: 20
+         });
+         magnifier.show(true);
+         canvas.addEventListener('mousemove', doMouseMove, false);
+
+
+         function doMouseenter(event) {
              magnifier.show(true);
+         }
 
-             canvas.addEventListener('mousemove', doMouseMove, false);
+         function doMouseMove(event) {
+             magnifier.bind(event);
+         }
+
+         function doMouseleave(event) {
+             magnifier.show(false);
+         }
+     })();
 
 
 
-             function doMouseMove(event) {
-                 magnifier.bind(event);
+
+     (function() {
+         var ratio = 3;
+         var canvas;
+         var magnifier;
+         var canvasId = 'demo_canvas2';
+         canvas = initCanvas(canvasId);
+
+         magnifier = jy.magnifier({
+             targetCanvasId: canvasId,
+             width: 200,
+             height: 400,
+             ratio: ratio,
+             magnifierDivId: 'canvas2_magnifier',
+             sightSize: 0
+
+         });
+         canvas.addEventListener('mousemove', doMouseMove, false);
+           canvas.addEventListener('touchmove', doMouseMove, false);
+         canvas.addEventListener('mousewheel', doMousewheel, false);
+         magnifier.show(true);
+
+
+         function doMouseMove(event) {
+         if(event.type=='touchmove'){
+         	 event.preventDefault();
+         }
+             magnifier.bind(event);
+         }
+
+         function doMousewheel(event) {
+             if (event && event.preventDefault) {
+                 event.preventDefault();
              }
+             var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
+             if (delta > 0) {
+                 ratio = ratio + 0.5;
+             } else {
+                 ratio = ratio - 0.5;
+             }
+             if (ratio < 1) {
+                 ratio = 1;
+             }
+             //console.log(delta+"->"+ event.wheelDelta+'->'+ event.detail,ratio);  
+             magnifier.setRatio(ratio);
+             return false;
+         }
+
+     })();
 
 
-         })();
 
 
 
-         (function() {
 
-             var canvas;
-             var magnifier;
-             var canvasId = 'demo_canvas1';
-             canvas = initCanvas(canvasId);
 
-             magnifier = jy.magnifier({
-                 targetCanvasId: canvasId,
-                 width: 300,
-                 height: 300,
-                 radius: 150,
-                 ratio: 5,
-                 sightColor: 'yellow',
-                 sightSize: 20
-             });
+
+     (function() {
+
+         var canvas;
+         var magnifier;
+         var canvasId = 'demo_canvas3';
+         var ratio = 5;
+         canvas = initCanvas(canvasId);
+
+         magnifier = jy.magnifier({
+             targetCanvasId: canvasId,
+             width: 200,
+             height: 200,
+             radius: 0,
+             ratio: ratio,
+             sightType: 'cross',
+             sightColor: 'black',
+             magnifierDivStyle: 'border:1px solid black;background:#fff;'
+         });
+
+         canvas.addEventListener("mouseenter", doMouseenter, false);
+         canvas.addEventListener('mousemove', doMouseMove, false);
+         canvas.addEventListener('mouseleave', doMouseleave, false);
+         canvas.addEventListener('mousewheel', doMousewheel, false);
+
+         function doMouseenter(event) {
              magnifier.show(true);
-             canvas.addEventListener('mousemove', doMouseMove, false);
+         }
 
-
-             function doMouseenter(event) {
-                 magnifier.show(true);
-             }
-
-             function doMouseMove(event) {
-                 magnifier.bind(event);
-             }
-
-             function doMouseleave(event) {
-                 magnifier.show(false);
-             }
-         })();
-
-
-
-
-         (function() {
-             var ratio = 3;
-             var canvas;
-             var magnifier;
-             var canvasId = 'demo_canvas2';
-             canvas = initCanvas(canvasId);
-
-             magnifier = jy.magnifier({
-                 targetCanvasId: canvasId,
-                 width: 200,
-                 height: 400,
-                 ratio: ratio,
-                 magnifierDivId: 'canvas2_magnifier',
-                 sightSize: 0
-
-             });
-             canvas.addEventListener('mousemove', doMouseMove, false);
-             canvas.addEventListener('mousewheel', doMousewheel, false);
-             magnifier.show(true);
-
-
-             function doMouseMove(event) {
-                 magnifier.bind(event);
-             }
-
-             function doMousewheel(event) {
-                 if (event && event.preventDefault) {
-                     event.preventDefault();
+         function doMouseMove(event) {
+             magnifier.bind(event, function(magnifierDiv) {
+                     var px = event.pageX;
+                     var py = event.pageY;
+                     magnifierDiv.style.top = py - 200 + 'px';
+                     magnifierDiv.style.left = px - 250 + 'px';
                  }
-                 var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
-                 if (delta > 0) {
-                     ratio = ratio + 0.5;
-                 } else {
-                     ratio = ratio - 0.5;
-                 }
-                 if (ratio < 1) {
-                     ratio = 1;
-                 }
-                 //console.log(delta+"->"+ event.wheelDelta+'->'+ event.detail,ratio);  
-                 magnifier.setRatio(ratio);
-                 return false;
+
+             );
+         }
+
+         function doMouseleave(event) {
+             magnifier.show(false);
+         }
+
+         function doMousewheel(event) {
+             if (event && event.preventDefault) {
+                 event.preventDefault();
              }
-
-         })();
-
-
-
-
-
-
-
-
-         (function() {
-
-             var canvas;
-             var magnifier;
-             var canvasId = 'demo_canvas3';
-             var ratio = 5;
-             canvas = initCanvas(canvasId);
-
-             magnifier = jy.magnifier({
-                 targetCanvasId: canvasId,
-                 width: 200,
-                 height: 200,
-                 radius: 0,
-                 ratio: ratio,
-                 sightType: 'cross',
-                 sightColor: 'black',
-                 magnifierDivStyle: 'border:1px solid black;background:#fff;'
-             });
-
-             canvas.addEventListener("mouseenter", doMouseenter, false);
-             canvas.addEventListener('mousemove', doMouseMove, false);
-             canvas.addEventListener('mouseleave', doMouseleave, false);
-             canvas.addEventListener('mousewheel', doMousewheel, false);
-
-             function doMouseenter(event) {
-                 magnifier.show(true);
+             var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
+             if (delta > 0) {
+                 ratio = ratio + 0.5;
+             } else {
+                 ratio = ratio - 0.5;
              }
-
-             function doMouseMove(event) {
-                 magnifier.bind(event, function(magnifierDiv) {
-                         var px = event.pageX;
-                         var py = event.pageY;
-                         magnifierDiv.style.top = py - 200 + 'px';
-                         magnifierDiv.style.left = px - 250 + 'px';
-                     }
-
-                 );
+             if (ratio < 1) {
+                 ratio = 1;
              }
-
-             function doMouseleave(event) {
-                 magnifier.show(false);
-             }
-
-             function doMousewheel(event) {
-                 if (event && event.preventDefault) {
-                     event.preventDefault();
-                 }
-                 var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
-                 if (delta > 0) {
-                     ratio = ratio + 0.5;
-                 } else {
-                     ratio = ratio - 0.5;
-                 }
-                 if (ratio < 1) {
-                     ratio = 1;
-                 }
-                 //console.log(delta+"->"+ event.wheelDelta+'->'+ event.detail,ratio);  
-                 magnifier.setRatio(ratio);
-                 return false;
-             }
-         })();
-
-
-
-
-
-     } //console.log(delta+"->"+ event.wheelDelta+'->'+ event.detail,ratio);  
- magnifier.setRatio(ratio);
- return false;
- }
- })();
+             //console.log(delta+"->"+ event.wheelDelta+'->'+ event.detail,ratio);  
+             magnifier.setRatio(ratio);
+             return false;
+         }
+     })();
 
 
 
