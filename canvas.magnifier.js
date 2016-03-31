@@ -91,11 +91,6 @@
             if (!magnifierShow) {
                 return;
             }
-            if (event.touches) {
-                event = event.touches[0];
-            }
-
-
             var pageX = event.pageX;
             var pageY = event.pageY;
             if (!magnifierDivId) {
