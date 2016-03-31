@@ -39,8 +39,8 @@
          });
          magnifier.show(true);
 
-         canvas.addEventListener('mousemove', doMouseMove, false);
 
+         canvas.addEventListener('mousemove', doMouseMove, false);
 
 
          function doMouseMove(event) {
@@ -105,11 +105,15 @@
 
          });
          canvas.addEventListener('mousemove', doMouseMove, false);
+         canvas.addEventListener('touchmove', doMouseMove, false);
          canvas.addEventListener('mousewheel', doMousewheel, false);
          magnifier.show(true);
 
 
          function doMouseMove(event) {
+             if (event.type == 'touchmove') {
+                 event.preventDefault();
+             }
              magnifier.bind(event);
          }
 
