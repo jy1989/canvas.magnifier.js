@@ -15,8 +15,9 @@ function doMouseMove(event) {
    magnifier.bind(event);
 }
 ```
-and more customs by setting
-## setting
+
+
+## api
 ```
 setting
   magnifierDivId      magnifier div element id
