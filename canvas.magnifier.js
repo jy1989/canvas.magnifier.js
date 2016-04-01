@@ -1,7 +1,11 @@
 ;
-(function(jy) {
+(function(name, definition) {
+    if (typeof module != 'undefined') module.exports = definition();
+    else if (typeof define == 'function' && typeof define.amd == 'object') define(definition);
+    else this[name] = definition();
+}('JyMagnifier', function() {
     "use strict";
-    jy.magnifier = function(setting) {
+    var JyMagnifier = function(setting) {
         var magnifierDiv;
         var magnifierDivId = setting.magnifierDivId;
         var magnifierCtx;
@@ -112,8 +116,6 @@
             offsetX -= width / 2;
             offsetY -= height / 2;
             _draw();
-
-
         }
 
         function _show(mshow) {
@@ -127,4 +129,5 @@
             setRatio: _setRatio
         };
     }
-}(window.jy = window.jy || {}));
+    return JyMagnifier
+}));
