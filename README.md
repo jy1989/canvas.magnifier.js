@@ -18,7 +18,11 @@ var magnifier = JyMagnifier({
 });
 magnifier.show(true);
 youCanvas.addEventListener('mousemove', doMouseMove, false);
+youCanvas.addEventListener('touchmove', doMouseMove, false);
 function doMouseMove(event) {
+   if (event.type == 'touchmove') {
+       event.preventDefault();
+   }
    magnifier.bind(event);
 }
 ```
