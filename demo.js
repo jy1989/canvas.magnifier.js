@@ -40,10 +40,13 @@
          magnifier.show(true);
 
 
-                canvas.addEventListener('mousemove', doMouseMove, false);
-
+         canvas.addEventListener('mousemove', doMouseMove, false);
+         canvas.addEventListener('touchmove', doMouseMove, false);
 
          function doMouseMove(event) {
+             if (event.type == 'touchmove') {
+                 event.preventDefault();
+             }
              magnifier.bind(event);
          }
 
@@ -70,13 +73,16 @@
          });
          magnifier.show(true);
          canvas.addEventListener('mousemove', doMouseMove, false);
-
+         canvas.addEventListener('touchmove', doMouseMove, false);
 
          function doMouseenter(event) {
              magnifier.show(true);
          }
 
          function doMouseMove(event) {
+             if (event.type == 'touchmove') {
+                 event.preventDefault();
+             }
              magnifier.bind(event);
          }
 
@@ -105,15 +111,15 @@
 
          });
          canvas.addEventListener('mousemove', doMouseMove, false);
-           canvas.addEventListener('touchmove', doMouseMove, false);
+         canvas.addEventListener('touchmove', doMouseMove, false);
          canvas.addEventListener('mousewheel', doMousewheel, false);
          magnifier.show(true);
 
 
          function doMouseMove(event) {
-         if(event.type=='touchmove'){
-         	 event.preventDefault();
-         }
+             if (event.type == 'touchmove') {
+                 event.preventDefault();
+             }
              magnifier.bind(event);
          }
 
@@ -164,16 +170,29 @@
          });
 
          canvas.addEventListener("mouseenter", doMouseenter, false);
+         canvas.addEventListener("touchstart", doMouseenter, false);
          canvas.addEventListener('mousemove', doMouseMove, false);
+         canvas.addEventListener('touchmove', doMouseMove, false);
          canvas.addEventListener('mouseleave', doMouseleave, false);
+         canvas.addEventListener('touchend', doMouseleave, false);
          canvas.addEventListener('mousewheel', doMousewheel, false);
 
          function doMouseenter(event) {
+             if (event.type == 'touchstart') {
+                 event.preventDefault();
+             }
              magnifier.show(true);
          }
 
          function doMouseMove(event) {
+             if (event.type == 'touchmove') {
+                 event.preventDefault();
+             }
              magnifier.bind(event, function(magnifierDiv) {
+                     if (event.touches) {
+                         event = event.touches[0];
+                     }
+
                      var px = event.pageX;
                      var py = event.pageY;
                      magnifierDiv.style.top = py - 200 + 'px';
@@ -184,6 +203,9 @@
          }
 
          function doMouseleave(event) {
+             if (event.type == 'touchend') {
+                 event.preventDefault();
+             }
              magnifier.show(false);
          }
 
