@@ -7,6 +7,10 @@ canvas.magnifier.js 用于在canvas上生成一个放大镜，放大镜的样式
 
 [DEMO](http://jy1989.github.io/magnifier/demo.html "demo")
 
+[]!(https://raw.githubusercontent.com/jy1989/canvas.magnifier.js/master/screenshot/Untitled.gif)
+[]!(https://raw.githubusercontent.com/jy1989/canvas.magnifier.js/master/screenshot/Untitled2.gif)
+[]!(https://raw.githubusercontent.com/jy1989/canvas.magnifier.js/master/screenshot/Untitled3.gif)
+[]!(https://raw.githubusercontent.com/jy1989/canvas.magnifier.js/master/screenshot/Untitled4.gif)
 
 ## Sample
 
