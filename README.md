@@ -13,7 +13,7 @@ canvas.magnifier.js 用于在canvas上生成一个放大镜，放大镜的样式
 you can just create magnifier by this simple way
 
 ```javascript
-var magnifier = jy.magnifier({
+var magnifier = JyMagnifier({
    targetCanvasId: youCanvasId
 });
 magnifier.show(true);

@@ -34,7 +34,7 @@
          var canvasId = 'demo_canvas';
          canvas = initCanvas(canvasId);
 
-         magnifier = jy.magnifier({
+         magnifier = JyMagnifier({
              targetCanvasId: canvasId
          });
          magnifier.show(true);
@@ -62,7 +62,7 @@
          var canvasId = 'demo_canvas1';
          canvas = initCanvas(canvasId);
 
-         magnifier = jy.magnifier({
+         magnifier = JyMagnifier({
              targetCanvasId: canvasId,
              width: 300,
              height: 300,
@@ -101,7 +101,7 @@
          var canvasId = 'demo_canvas2';
          canvas = initCanvas(canvasId);
 
-         magnifier = jy.magnifier({
+         magnifier = JyMagnifier({
              targetCanvasId: canvasId,
              width: 200,
              height: 400,
@@ -158,7 +158,7 @@
          var ratio = 5;
          canvas = initCanvas(canvasId);
 
-         magnifier = jy.magnifier({
+         magnifier = JyMagnifier({
              targetCanvasId: canvasId,
              width: 200,
              height: 200,
