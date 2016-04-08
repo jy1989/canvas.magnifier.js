@@ -12,9 +12,9 @@ canvas.magnifier.js 用于在canvas上生成一个放大镜，放大镜的样式
 ![](https://raw.githubusercontent.com/jy1989/canvas.magnifier.js/master/screenshot/Untitled3.gif)
 ![](https://raw.githubusercontent.com/jy1989/canvas.magnifier.js/master/screenshot/Untitled4.gif)
 
-## Sample
+## Basic Usage
 
-you can just create magnifier by this simple way
+You can just create magnifier by this simple way.
 
 ```javascript
 var magnifier = JyMagnifier({
@@ -53,4 +53,4 @@ method
   setRatio(Number ratio)                set the ratio dynamically
 ```
 
-see demo.js for more details.
+See [demo.js](https://github.com/jy1989/canvas.magnifier.js/blob/master/demo.js) for more details.
