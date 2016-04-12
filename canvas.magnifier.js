@@ -29,12 +29,28 @@
         var offsetX = 0;
         var offsetY = 0;
 
+        //var borderHackWidth = width;
+        //var borderHackHeight = height;
+        var hackCanvas;
+        var hackCtx;
+
         function _setRatio(mRatio) {
             ratio = mRatio;
             widthOffset = width * ratio / 2 - width / 2;
             heightOffset = height * ratio / 2 - height / 2;
             _draw();
         }
+
+        function _createCanvas(width, height) {
+            var canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+            canvas.style.background = '#ffffff';
+            return canvas
+        }
+
 
         function _init() {
             if (!magnifierDivId) {
@@ -52,23 +68,28 @@
                 magnifierDiv = document.getElementById(magnifierDivId);
             }
 
-            magnifierCanvas = document.createElement('canvas');
-            magnifierCanvas.width = width;
-            magnifierCanvas.height = height;
-            magnifierCanvas.style.width = width + 'px';
-            magnifierCanvas.style.height = height + 'px';
+            magnifierCanvas = _createCanvas(width, height);
+
 
             if (magnifierDiv.style.borderRadius) {
                 magnifierCanvas.style.borderRadius = magnifierDiv.style.borderRadius;
             }
             magnifierDiv.appendChild(magnifierCanvas);
             magnifierCtx = magnifierCanvas.getContext("2d");
+
+            hackCanvas = _createCanvas(targetCanvas.width + width, targetCanvas.height + height);
+            hackCanvas.style.display = 'none';
+            document.body.appendChild(hackCanvas);
+            hackCtx = hackCanvas.getContext("2d");
+
             _draw();
         }
 
         function _draw() {
-            magnifierCtx.clearRect(0, 0, width, height);
-            magnifierCtx.drawImage(targetCanvas, offsetX, offsetY, width, height, -widthOffset, -heightOffset, width * ratio, height * ratio);
+            hackCtx.clearRect(0, 0, hackCanvas.width, hackCanvas.height);
+            hackCtx.drawImage(targetCanvas, width / 2, height / 2, targetCanvas.width, targetCanvas.height);
+            magnifierCtx.clearRect(0, 0, magnifierCanvas.width, magnifierCanvas.height);
+            magnifierCtx.drawImage(hackCanvas, offsetX, offsetY, width, height, -widthOffset, -heightOffset, width * ratio, height * ratio);
             if (sightType) {
                 if (sightType == 'rect') {
                     if (sightSize > 0) {
@@ -112,9 +133,13 @@
             }
             offsetX = event.offsetX || pageX - targetCanvas.offsetLeft;
             offsetY = event.offsetY || pageY - targetCanvas.offsetTop;
+            /*
+                        offsetX -= width / 2;
+                        offsetY -= height / 2;
 
-            offsetX -= width / 2;
-            offsetY -= height / 2;
+                        offsetX += borderHackWidth / 2;
+                        offsetY += borderHackHeight / 2
+            */
             _draw();
         }
 
